@@ -61,6 +61,25 @@ exports.update = async (req, res) => {
   }
 };
 
+const seedProducts = [
+  { name: 'Wireless Bluetooth Headphones', description: 'Noise-cancelling over-ear headphones with 30hr battery life.', price: 79.99, category: 'Electronics' },
+  { name: 'Organic Cotton T-Shirt', description: 'Soft, eco-friendly unisex t-shirt available in 6 colors.', price: 24.99, category: 'Clothing' },
+  { name: 'Stainless Steel Water Bottle', description: 'Double-wall insulated, keeps drinks cold for 24 hours.', price: 18.50, category: 'Home' },
+  { name: 'JavaScript: The Good Parts', description: 'A deep dive into the best features of JavaScript.', price: 29.99, category: 'Books' },
+  { name: 'Yoga Mat Premium', description: 'Extra thick, non-slip surface with carrying strap.', price: 45.00, category: 'Sports' },
+];
+
+exports.seed = async (req, res) => {
+  try {
+    await Product.destroy({ where: {}, truncate: true });
+    await Product.sequelize.query("DELETE FROM sqlite_sequence WHERE name='products'");
+    const products = await Product.bulkCreate(seedProducts);
+    res.status(201).json({ message: 'Database seeded with 5 products', products });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.remove = async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);

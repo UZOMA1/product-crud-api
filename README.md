@@ -43,9 +43,14 @@ curl -X POST http://localhost:3000/api/products \
   -d '{"name":"Coffee Mug","description":"Ceramic 12oz mug","price":12.99,"category":"Home"}'
 ```
 
+### POST seed database (inserts 5 sample products)
+```bash
+curl -X POST http://localhost:3000/api/products/seed
+```
+
 ### PUT update product
 ```bash
-curl -X PUT http://localhost:3000/api/products/1 \
+curl -X PUT http://localhost:3000/api/products/6 \
   -H "Content-Type: application/json" \
   -d '{"price":69.99}'
 ```
