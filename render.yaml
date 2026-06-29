@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: product-crud-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/products
+    envVars:
+      - key: NODE_ENV
+        value: production
